@@ -1,0 +1,31 @@
+{
+    "name": "boxiaozhi/cdirect",
+    "description": "short url && Reverse Proxy",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Conte",
+            "email": "boxiaozhi.bolu@gmail.com"
+        }
+    ],
+    "require": {
+        "ext-json": "*",
+        "guzzlehttp/guzzle": "^6.3",
+        "vlucas/phpdotenv": "^3.4"
+    },
+    "repositories": {
+        "packagist": {
+            "type": "composer",
+            "url": "https://mirrors.aliyun.com/composer/"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Cdirect\\": "src/"
+        },
+        "files": [
+            "libs/helpers.php"
+        ]
+    }
+}
