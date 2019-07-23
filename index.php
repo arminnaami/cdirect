@@ -16,7 +16,7 @@ $dotenv->load();
 preg_match_all('/\/([\w:]+)/i', $request_uri, $matches);
 $params = isset($matches[1]) ? $matches[1] : '';
 $type = isset($params[0]) ? $params[0] : '';
-$types = ['tele'];
+$types = ['telegram'];
 if(!in_array($type, $types)) response(['ok' => false, 'error_code' => 500, 'description' => 'invalid request']);
 
 $client = new Client();
@@ -35,7 +35,7 @@ switch($type){
             break;
         }
         try{
-            $verify = __DIR__ . "\cert\cacert.pem";
+            $verify = __DIR__ . "/cert/cacert.pem";
             $timeout = getenv('TELEGRAM_TIMEOUT') ?: 10;
             $options = ['verify' => $verify, 'timeout' => $timeout, 'query' => $data];
             $proxy = getenv('TELEGRAM_PROXY');
