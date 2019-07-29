@@ -17,6 +17,7 @@ preg_match_all('/\/([\w:]+)/i', $request_uri, $matches);
 $params = isset($matches[1]) ? $matches[1] : '';
 $type = isset($params[0]) ? $params[0] : '';
 $types = ['telegram'];
+if(!$type && !$params) response($types);
 if(!in_array($type, $types)) response(['ok' => false, 'error_code' => 500, 'description' => 'invalid request']);
 
 $client = new Client();
@@ -48,6 +49,9 @@ switch($type){
                 $response = ['ok' => false, 'error_code' => $e->getCode(), 'description' => $e->getMessage()];
             }
         }
+        break;
+    case 'info':
+
         break;
     default:
         $response = [

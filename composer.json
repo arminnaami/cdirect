@@ -12,7 +12,9 @@
     "require": {
         "ext-json": "*",
         "guzzlehttp/guzzle": "^6.3",
-        "vlucas/phpdotenv": "^3.4"
+        "vlucas/phpdotenv": "^3.4",
+        "jaeger/querylist": "^4.1",
+        "boxiaozhi/cmubu": "^1.4"
     },
     "repositories": {
         "packagist": {
