@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "boxiaozhi/cmubu",
-            "version": "1.4.0",
+            "version": "1.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/boxiaozhi/cmubu.git",
-                "reference": "b49f336e0236d8217b20a79948226c8f4fb54002"
+                "reference": "dfbdd38d254786804c10adfb0733bb6129707507"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/boxiaozhi/cmubu/zipball/b49f336e0236d8217b20a79948226c8f4fb54002",
-                "reference": "b49f336e0236d8217b20a79948226c8f4fb54002",
+                "url": "https://api.github.com/repos/boxiaozhi/cmubu/zipball/dfbdd38d254786804c10adfb0733bb6129707507",
+                "reference": "dfbdd38d254786804c10adfb0733bb6129707507",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -47,7 +47,7 @@
                 }
             ],
             "description": "api for mubu",
-            "time": "2019-07-26T10:39:13+00:00"
+            "time": "2019-07-30T10:19:45+00:00"
         },
         {
             "name": "cache/adapter-common",

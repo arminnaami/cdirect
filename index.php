@@ -1,4 +1,5 @@
 <?php
+error_reporting(1);
 require 'vendor/autoload.php';
 
 use Dotenv\Dotenv;
@@ -7,16 +8,15 @@ use GuzzleHttp\Exception\GuzzleException;
 
 $request_uri = $_SERVER['REQUEST_URI'];
 $request_method = $_SERVER['REQUEST_METHOD'];
-$request_scheme = $_SERVER['REQUEST_SCHEME'];
 $request = $_REQUEST;
 
-$dotenv = Dotenv::create(__DIR__,'.env');
+$dotenv = Dotenv::create(__DIR__, '.env');
 $dotenv->load();
 
 preg_match_all('/\/([\w:]+)/i', $request_uri, $matches);
 $params = isset($matches[1]) ? $matches[1] : '';
 $type = isset($params[0]) ? $params[0] : '';
-$types = ['telegram'];
+$types = ['telegram', 'info'];
 if(!$type && !$params) response($types);
 if(!in_array($type, $types)) response(['ok' => false, 'error_code' => 500, 'description' => 'invalid request']);
 
@@ -50,8 +50,10 @@ switch($type){
             }
         }
         break;
-    case 'info':
-
+    case 'info': //获取信息
+        $name = isset($params[1]) ? $params[1] : '';
+        $res = \Cdirect\Info::get($name);
+        response($res);
         break;
     default:
         $response = [

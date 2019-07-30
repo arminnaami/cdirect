@@ -4,3 +4,4 @@ vendor
 .vagrant
 .stignore
 .env
+tmp/env.json
