@@ -4,4 +4,6 @@ vendor
 .vagrant
 .stignore
 .env
-tmp/env.json
+
+tmp/*
+!tmp/.gitkeep
