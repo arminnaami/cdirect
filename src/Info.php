@@ -6,16 +6,50 @@ class Info{
     private static $errorCode = 200;
     private static $request = [];
     private static $param = [];
+    private static $apiKeys = ['sspai'];
+    private static $ttl = 600;
+    private static $configFile;
+
+    public static function init()
+    {
+        self::$ttl = getenv('CONFIG_TTL_INFO');
+        self::$configFile = getenv('CONFIG_FILE_INFO');
+    }
 
     public static function get($key, $request=[])
+    {
+        self::init();
+        if(!$key) {
+            $ttl = self::$ttl;
+            $configFile = self::$configFile;
+            $formatData = mubuConfig($configFile, 0, $ttl);
+            $keys = array_keys($formatData);
+            $data = array_merge($keys, self::$apiKeys);
+            return $data;
+        }
+        if(in_array($key, self::$apiKeys)){
+            return self::getApi($key, $request);
+        } else {
+            return self::getQueryList($key, $request);
+        }
+    }
+
+
+    public static function getApi($key, $request=[])
+    {
+        $data = [];
+        return $data;
+    }
+
+    public static function getQueryList($key, $request=[])
     {
         $cache = isset($request['cache'])&&in_array($request['cache'], [0, 1]) ? $request['cache'] : 1; // 0 实时获取更新缓存， 1 获取缓存
         $cache_pre = 'info_';
         self::$request = $request;
 
         try{
-            $ttl = getenv('CONFIG_TTL_INFO');
-            $configFile = getenv('CONFIG_FILE_INFO');
+            $ttl = self::$ttl;
+            $configFile = self::$configFile;
             $formatData = mubuConfig($configFile, $cache, $ttl);
 
             if(!$key) return array_keys($formatData);
@@ -28,7 +62,7 @@ class Info{
                    unset($queryNames[$index]);
                 }
             }
-            if(count($queryNames) == 0) return array_keys($formatData);
+            if(count($queryNames) == 0) return error('not found', 404);
 
             asort(self::$param);
             $cacheFileName = $cache_pre.implode('_', $queryNames);
