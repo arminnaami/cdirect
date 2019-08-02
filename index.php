@@ -22,7 +22,7 @@ if(!in_array($type, $types)) response(['ok' => false, 'error_code' => 500, 'desc
 
 $client = new Client();
 switch($type){
-    case 'telegram': //Telegram
+    case 'telegram': //Telegram 代理
         $url = 'https://api.telegram.org';
         $data = ($request_method == 'GET') ? $_GET : $_POST;
         $token = isset($params[1]) ? $params[1] : '';
@@ -52,8 +52,10 @@ switch($type){
         break;
     case 'info': //获取信息
         $name = isset($params[1]) ? $params[1] : '';
-        $res = \Cdirect\Info::get($name);
+        $res = \Cdirect\Info::get($name, $request);
         response($res);
+        break;
+    case 'hitokoto': //一言
         break;
     default:
         $response = [
